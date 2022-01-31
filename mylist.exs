@@ -32,8 +32,9 @@ defmodule MyList do
   end
 
   def caesar([], _shift), do: []
-  def caesar([head|tail], shift) do
-    head + shift
-    caesar(tail, shift)
-  end
+  def caesar([head|tail], shift) when (head + shift) <= ?z,
+    do: [ head + shift | caesar(tail, shift) ]
+  def caesar([head|tail], shift),
+    do: [ head + shift - 26 | caesar(tail, shift) ]
+
 end
